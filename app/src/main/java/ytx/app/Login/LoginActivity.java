@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import ytx.ytx.R;
+import ytx.app.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText username;

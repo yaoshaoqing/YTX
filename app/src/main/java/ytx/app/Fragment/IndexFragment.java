@@ -49,7 +49,7 @@ import ytx.app.main.Camp_detailActivity;
 import ytx.app.Http.GetPost.GetPostUtil;
 import ytx.app.ListAdapters.ListAdapter;
 import ytx.app.main.MainActivity;
-import ytx.ytx.R;
+import ytx.app.R;
 
 import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 

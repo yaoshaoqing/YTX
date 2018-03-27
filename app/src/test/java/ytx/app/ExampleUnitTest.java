@@ -1,4 +1,4 @@
-package ytx.ytx;
+package ytx.app;
 
 import org.junit.Test;
 

@@ -2,8 +2,6 @@ package ytx.app.ListAdapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +13,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ytx.app.ImageLoader.ImageLoader;
-import ytx.ytx.R;
+import ytx.app.R;
 
 /**
  * Created by vi爱 on 2018/1/22.

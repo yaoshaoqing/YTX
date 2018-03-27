@@ -1,15 +1,13 @@
 package ytx.app.Login;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import ytx.ytx.R;
+import ytx.app.R;
 public class RegActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText username;
     private EditText code;

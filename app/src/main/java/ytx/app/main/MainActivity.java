@@ -1,7 +1,6 @@
 package ytx.app.main;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,7 +23,7 @@ import ytx.app.Fragment.GncampFragment;
 import ytx.app.Fragment.IndexFragment;
 import ytx.app.Fragment.PersonalFragment;
 import ytx.app.Helper.Helper;
-import ytx.ytx.R;
+import ytx.app.R;
 import ytx.app.Login.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
         viewpage();
-
+        getDB();
+        //insertToStu();
     }
 
     /**
@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
         //第一次执行时，会触发helper对象调用onCreate方法创建表
         SQLiteDatabase db = helper.getReadableDatabase();
         return db;
+    }
+    public void insertToStu() {//增加一条学生记录
+        SQLiteDatabase db = this.getDB();
+        //String sql = "insert into user(username, password,sign_sn,login_type)values('yaoshaoqing','123456','1234567','1')";
+        String sql = "DROP TABLE user;";
+        db.execSQL(sql);
+        db.close();
     }
     /**
      * 动太设置底部导航栏高度、宽度
@@ -89,17 +96,21 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setCurrentItem(2,false);
         //个人中心
         }else if(R.id.personal == id){
-            SQLiteDatabase db = this.getDB();
-            Cursor cursor = db.query("user", new String[]{"_id","name","age"}, "_id>? and _id<?", new String[]{"0","100"}, null, null, null);
-            List<String> list = new ArrayList<String>();
-            while (cursor.moveToNext()) {
-                int _id = cursor.getInt(cursor.getColumnIndex("_id"));
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                int age = cursor.getInt(cursor.getColumnIndex("age"));
-                //list.add(new Stu(_id, name,age));
-            }
-            cursor.close();
-            db.close();
+//            SQLiteDatabase db = this.getDB();
+//            Cursor cursor = db.query("user", new String[]{"_id","username","password","sign_sn","login_type"}, "login_type = ?", new String[]{"1"}, null, null, null);
+//            List<String> list = new ArrayList<String>();
+//            while (cursor.moveToNext()) {
+//                int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+//                String username = cursor.getString(cursor.getColumnIndex("username"));
+//                String password = cursor.getString(cursor.getColumnIndex("password"));
+//                String sign_sn = cursor.getString(cursor.getColumnIndex("sign_sn"));
+//                String login_type = cursor.getString(cursor.getColumnIndex("login_type"));
+//                //list.add(new Stu(_id, name,age));
+//                System.out.println(username);
+//                System.out.println(_id);
+//            }
+//            cursor.close();
+//            db.close();
             Intent intent = new Intent();
             intent.putExtra("name","123");
             intent.setClass(MainActivity.this,LoginActivity.class);

@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import ytx.ytx.R;
+import ytx.app.R;
 
 import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 

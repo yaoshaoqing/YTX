@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import ytx.ytx.R;
+import ytx.app.R;
 public class ForgetActivity extends AppCompatActivity {
     private EditText username;
     private EditText code;

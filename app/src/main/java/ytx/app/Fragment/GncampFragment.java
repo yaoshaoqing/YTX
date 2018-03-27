@@ -2,7 +2,6 @@ package ytx.app.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,7 +35,7 @@ import ytx.app.main.Camp_detailActivity;
 import ytx.app.Http.GetPost.GetPostUtil;
 import ytx.app.ListAdapters.ListAdapter;
 import ytx.app.main.MainActivity;
-import ytx.ytx.R;
+import ytx.app.R;
 
 import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 
