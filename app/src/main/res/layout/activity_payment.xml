@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fadingEdge="vertical"
-    android:scrollbarStyle="insideInset"
-    android:scrollbars="vertical">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#f0f0f0"
     tools:context="ytx.app.main.PaymentActivity">
-
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="vertical"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -160,6 +164,13 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pay_type"
+            android:text="1"
+            android:visibility="invisible"
+            />
         <!--支付方式-->
         <LinearLayout
             android:layout_width="@dimen/x293"
@@ -182,6 +193,7 @@
         <RelativeLayout
             android:layout_width="@dimen/x293"
             android:layout_height="@dimen/y30"
+            android:id="@+id/wxpay"
             android:orientation="horizontal"
             >
             <TextView
@@ -194,6 +206,7 @@
                 android:src="@drawable/payment0"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/y5"
+                android:id="@+id/wxpay_img"
                 />
         </RelativeLayout>
         <View
@@ -203,6 +216,7 @@
         <RelativeLayout
             android:layout_width="@dimen/x293"
             android:layout_height="@dimen/y30"
+            android:id="@+id/alipay"
             android:orientation="horizontal"
             >
             <TextView
@@ -213,6 +227,7 @@
                 android:layout_width="@dimen/x20"
                 android:layout_height="@dimen/y20"
                 android:src="@drawable/payment0"
+                android:id="@+id/alipay_img"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/y5"
                 />
@@ -224,6 +239,7 @@
         <RelativeLayout
             android:layout_width="@dimen/x293"
             android:layout_height="@dimen/y30"
+            android:id="@+id/payment"
             android:orientation="horizontal"
             >
             <TextView
@@ -234,6 +250,7 @@
                 android:layout_width="@dimen/x20"
                 android:layout_height="@dimen/y20"
                 android:src="@drawable/payment1"
+                android:id="@+id/payment_img"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/y5"
                 />
@@ -251,10 +268,13 @@
         >
 
     </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y37"
         android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/daohang"
         >
 
@@ -277,7 +297,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥12800.00"
+                android:text=""
+                android:id="@+id/buy_price"
                 android:textSize="16sp"
                 android:textColor="#ff5500" />
         </LinearLayout>
@@ -304,5 +325,5 @@
                 />
         </LinearLayout>
     </RelativeLayout>
-</LinearLayout>
-</ScrollView>
+</RelativeLayout>
+

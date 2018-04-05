@@ -60,7 +60,7 @@
         <Button
             style="@style/Login_button"
             android:text="登录"
-            android:id="@+id/login"
+            android:id="@+id/button"
             />
     </LinearLayout>
     <RelativeLayout

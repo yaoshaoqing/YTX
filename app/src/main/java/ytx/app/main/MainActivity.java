@@ -1,7 +1,7 @@
 package ytx.app.main;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -22,9 +22,7 @@ import ytx.app.Fragment.CncampFragment;
 import ytx.app.Fragment.GncampFragment;
 import ytx.app.Fragment.IndexFragment;
 import ytx.app.Fragment.PersonalFragment;
-import ytx.app.Helper.Helper;
 import ytx.app.R;
-import ytx.app.Login.*;
 
 public class MainActivity extends AppCompatActivity {
     protected ImageView img_index,img_cncamp,img_gncamp,img_personal;
@@ -39,43 +37,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
         viewpage();
-        getDB();
-        //insertToStu();
+
     }
 
-    /**
-     * 数据库
-     * @return
-     */
-    private SQLiteDatabase getDB() {
-        //Context context, String name, SQLiteDatabase.CursorFactory factory, int version
-        //发果版本号不变，调用构造方法时，会创建数据库,数据库的名字是nexa,版本号为BB
-        Helper helper = new Helper(this,"ytx",null,1);
-        //第一次执行时，会触发helper对象调用onCreate方法创建表
-        SQLiteDatabase db = helper.getReadableDatabase();
-        return db;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == 200){
+            seticon(3);
+            viewPager.setCurrentItem(3,false);
+        }
     }
-    public void insertToStu() {//增加一条学生记录
-        SQLiteDatabase db = this.getDB();
-        //String sql = "insert into user(username, password,sign_sn,login_type)values('yaoshaoqing','123456','1234567','1')";
-        String sql = "DROP TABLE user;";
-        db.execSQL(sql);
-        db.close();
-    }
-    /**
-     * 动太设置底部导航栏高度、宽度
-     */
-//    protected void ButtonHeight(){
-//        RelativeLayout.LayoutParams lineareHeight =(RelativeLayout.LayoutParams) this.findViewById(R.id.button).getLayoutParams();
-//        DisplayMetrics dm = this.getResources().getDisplayMetrics();
-//        int DisplayWidth = dm.widthPixels;
-//        int DisplayHeight = dm.heightPixels;
-//        //Toast.makeText(this,"宽"+width+",高"+height,Toast.LENGTH_LONG).show();
-//        Double setHeight = DisplayWidth * 0.081;
-//        lineareHeight.height = setHeight.intValue();
-//        float Heigth = this.findViewById(R.id.button).getLayoutParams().height;
-//        Toast.makeText(this,Heigth+"",Toast.LENGTH_LONG).show();
-//    }
+
     /**
      * 设置点击事件
      * @param v
@@ -96,27 +70,16 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setCurrentItem(2,false);
         //个人中心
         }else if(R.id.personal == id){
-//            SQLiteDatabase db = this.getDB();
-//            Cursor cursor = db.query("user", new String[]{"_id","username","password","sign_sn","login_type"}, "login_type = ?", new String[]{"1"}, null, null, null);
-//            List<String> list = new ArrayList<String>();
-//            while (cursor.moveToNext()) {
-//                int _id = cursor.getInt(cursor.getColumnIndex("_id"));
-//                String username = cursor.getString(cursor.getColumnIndex("username"));
-//                String password = cursor.getString(cursor.getColumnIndex("password"));
-//                String sign_sn = cursor.getString(cursor.getColumnIndex("sign_sn"));
-//                String login_type = cursor.getString(cursor.getColumnIndex("login_type"));
-//                //list.add(new Stu(_id, name,age));
-//                System.out.println(username);
-//                System.out.println(_id);
-//            }
-//            cursor.close();
-//            db.close();
-            Intent intent = new Intent();
-            intent.putExtra("name","123");
-            intent.setClass(MainActivity.this,LoginActivity.class);
-            startActivity(intent);
-            //seticon(3);
-            //viewPager.setCurrentItem(3,false);
+            //判断是否登录
+            if(!IsLogin.getLogin_type(this)){
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                return;
+            }
+            //已登录
+            seticon(3);
+            viewPager.setCurrentItem(3,false);
         }
 //        BaseFragment baseFragment = new BaseFragment(this.view);
 //        this.fragmentManager = this.getSupportFragmentManager();

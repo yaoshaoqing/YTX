@@ -20,57 +20,42 @@ public class Helper extends SQLiteOpenHelper{
     public Helper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
+    protected SQLiteDatabase db;
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "" +
-                "create table user(_id integer primary key autoincrement," +
-                "uid text ," +
-                "nickname text ," +
-                "name text ," +
-                "telephone text ," +
-                "mobile text ," +
-                "remark text ," +
-                "sign_sn text ," +
-                "msg_unread_num integer(11) ," +
-                "login_type integer(1))";
+                "create table user(_id integer primary key autoincrement,uid text,nickname text,name text,telephone text,mobile text,remark text,sign_sn text,msg_unread_num integer(11),login_type integer(1))";
         //String sql2 = "create table teacher...";
         db.execSQL(sql);
-        db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("delete from stu");
     }
 
-    public void insert() {//增加一条学生记录
-        SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "insert into user(username, password,sign_sn,login_type)values('yaoshaoqing','123456','1234567','1')";
-        //String sql = "DROP TABLE user;";
-        db.execSQL(sql);
-        db.close();
-    }
-
-    public void updateAll() {
-        SQLiteDatabase db = this.getReadableDatabase();
+    public void UpdateAll() {
+        db = this.getReadableDatabase();
         String sql = "update user set sign_sn='0'";
         db.execSQL(sql);
         db.close();
     }
-
-    public void update(ContentValues values,String[] str) {//修改学生记录
-        SQLiteDatabase db = this.getReadableDatabase();
-//        String sql = "update user set sign_sn='0'";
-//        db.execSQL(sql);
-//        ContentValues values = new ContentValues();
-//        values.put("name","王五");
-//        values.put("age","12");
-        db.update("user", values, "uid?", str);
-        db.close();;
+    public Boolean islogin(){
+        db = this.getReadableDatabase();
+        String sql = "select _id,name from user where login_type = 1";
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst() != false){
+            cursor.close();
+            db.close();
+            return true;
+        }else{
+            cursor.close();
+            db.close();
+            return false;
+        }
     }
-
-    public Boolean select(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query("user", new String[]{"_id","username","password","sign_sn","login_type"}, "login_type = ?", new String[]{"1"}, null, null, null);
+    public Boolean Select(String[] str){
+        db = this.getReadableDatabase();
+        //Cursor cursor = db.query("user", new String[]{"_id"}, "uid = ?", str, null, null, null);
 //            List<String> list = new ArrayList<String>();
 //            while (cursor.moveToNext()) {
 //                int _id = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -82,13 +67,31 @@ public class Helper extends SQLiteOpenHelper{
 //                System.out.println(username);
 //                System.out.println(_id);
 //            }
+        String sql = "select _id,name from user where login_type>0";
+        Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         int id = cursor.getInt(cursor.getColumnIndex("_id"));
         cursor.close();
         db.close();
+        //return cursor.getString(cursor.getColumnIndex("nickname"));
         if(id > 0){
             return true;
         }
         return false;
     }
+
+    public void LoginType(ContentValues values,String uid){
+        db = this.getReadableDatabase();
+        String sql = "select _id,name from user where uid = "+uid;
+        Cursor cursor = db.rawQuery(sql, null);
+        //Integer id = cursor.getInt(cursor.getColumnIndex("_id"));
+        if(cursor.moveToFirst() != false){
+            db.update("user",values,"uid = ?",new String[]{uid});
+        }else{
+            db.insert("user",null,values);
+        }
+        cursor.close();
+        db.close();
+    }
+
 }

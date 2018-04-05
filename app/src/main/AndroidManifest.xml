@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="ytx.app.main.MainActivity"
+            android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,12 +26,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ytx.app.Login.LoginActivity" />
-        <activity android:name="ytx.app.Login.ForgetActivity" />
-        <activity android:name="ytx.app.Login.RegActivity" />
-        <activity android:name="ytx.app.main.Camp_detailActivity" />
-        <activity android:name="ytx.app.main.Firm_orderActivity" android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name="ytx.app.main.PaymentActivity"></activity>
+        <activity android:name=".main.LoginActivity" />
+        <activity android:name=".main.ForgetActivity" />
+        <activity android:name=".main.RegActivity" />
+        <activity android:name=".main.Camp_detailActivity" />
+        <activity
+            android:name=".main.Firm_orderActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".main.PaymentActivity" />
     </application>
 
 </manifest>

@@ -218,9 +218,9 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
                         images.add(imageView);
 
                     }
-                    if(images.size() != 6) {
-                        Thread.sleep(1500);
-                    }
+//                    if(images.size() != 6) {
+//                        Thread.sleep(1500);
+//                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();

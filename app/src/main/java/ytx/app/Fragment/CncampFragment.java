@@ -164,7 +164,6 @@ public class CncampFragment extends BaseFragment implements AdapterView.OnItemCl
         StringRequest stringRequest = new StringRequest(Request.Method.POST,INTERFACE_URL+"list_camp.php",new Response.Listener<String>(){
             @Override
             public void onResponse(String string) {
-                System.out.println(string);
                 try {
                     JSONObject json = new JSONObject(string);
                     JSONArray jsonArray = json.getJSONArray("data");

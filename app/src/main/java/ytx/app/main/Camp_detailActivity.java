@@ -3,6 +3,7 @@ package ytx.app.main;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,13 +25,10 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-
 import java.util.HashMap;
 import java.util.Map;
 
 import ytx.app.*;
-
 import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 
 public class Camp_detailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -180,7 +178,6 @@ public class Camp_detailActivity extends AppCompatActivity implements View.OnCli
                         application_notes.loadData(getHtmlData(jsonObject.getString("application_notes")),"text/html; charset=UTF-8", null);
                         cost_description.loadData(getHtmlData(jsonObject.getString("cost_description")),"text/html; charset=UTF-8", null);
                         notes.loadData(getHtmlData(jsonObject.getString("notes")),"text/html; charset=UTF-8", null);
-
                         Picasso.with(Camp_detailActivity.this).load(jsonObject.getString("cover")).fit().into(imageView);
                         String camp_schedule = "";
                         camp_date_id = new String[jsonObject.getJSONArray("camp_date").length()];
@@ -216,6 +213,8 @@ public class Camp_detailActivity extends AppCompatActivity implements View.OnCli
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("camp_id", campid);
+                map.put("uid",IsLogin.getone(Camp_detailActivity.this).get("uid"));
+                map.put("sign_sn",IsLogin.getone(Camp_detailActivity.this).get("sign_sn"));
                 return map;
             }
         };
@@ -243,14 +242,14 @@ public class Camp_detailActivity extends AppCompatActivity implements View.OnCli
                     Toast.makeText(this,"操作异常",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent = new Intent();
-                intent.putExtra("camp_id",campid);
-                intent.putExtra("title",camp_title);
-                intent.putExtra("departure_id",select_camp_date_id);
-                intent.putExtra("camp_date_title",camp_date_title);
-                intent.putExtra("price",camp_date_price);
-                intent.setClass(this, Firm_orderActivity.class);
-                startActivity(intent);
+                if(!IsLogin.getLogin_type(this)){
+                    Intent intent = new Intent();
+                    intent.setClass(this, LoginActivity.class);
+                    startActivityForResult(intent, 0);
+                }else {
+                    redirection();
+                }
+
                 break;
             case R.id.camp_date:
                 //System.out.println(camp_date_text[1]);
@@ -298,4 +297,25 @@ public class Camp_detailActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     *跳转回调
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == 200){
+            redirection();
+        }
+    }
+
+    public void redirection(){
+        Intent intent = new Intent();
+        intent.putExtra("camp_id",campid);
+        intent.putExtra("title",camp_title);
+        intent.putExtra("departure_id",select_camp_date_id);
+        intent.putExtra("camp_date_title",camp_date_title);
+        intent.putExtra("price",camp_date_price);
+        intent.setClass(this, Firm_orderActivity.class);
+        startActivityForResult(intent,0);
+    }
 }

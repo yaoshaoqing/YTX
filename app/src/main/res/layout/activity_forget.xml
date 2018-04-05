@@ -108,7 +108,7 @@
         <Button
             style="@style/Login_button"
             android:text="确定"
-            android:id="@+id/login"
+            android:id="@+id/submit"
             />
     </LinearLayout>
 

@@ -108,7 +108,7 @@
         <Button
             android:text="注册"
             style="@style/Login_button"
-            android:id="@+id/login"
+            android:id="@+id/submit"
             />
     </LinearLayout>
 
