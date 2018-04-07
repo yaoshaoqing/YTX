@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,6 +57,7 @@ public class Camp_detailActivity extends AppCompatActivity implements View.OnCli
     protected String camp_title = "";
     protected String camp_date_title = "";
     protected String camp_date_price = "";
+    protected Typeface typeface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class Camp_detailActivity extends AppCompatActivity implements View.OnCli
         this.camp_date.setOnClickListener(this);
         mQueue = Volley.newRequestQueue(this);
         setData();
+        setFace();
     }
 
     /**
@@ -307,7 +310,12 @@ public class Camp_detailActivity extends AppCompatActivity implements View.OnCli
             redirection();
         }
     }
-
+    //设置字体
+    protected void setFace(){
+        this.typeface = Typeface.createFromAsset(getAssets(),"fonts/PingFang.ttf");
+        this.title.setTypeface(typeface);
+        this.price.setTypeface(typeface);
+    }
     public void redirection(){
         Intent intent = new Intent();
         intent.putExtra("camp_id",campid);

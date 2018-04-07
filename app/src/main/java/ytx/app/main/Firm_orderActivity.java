@@ -4,6 +4,7 @@ import ytx.app.R;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class Firm_orderActivity extends AppCompatActivity implements View.OnClic
     private TextView remark;
     private TextView Coupon_id;
     private String camp_date_title;
+    protected Typeface typeface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,7 @@ public class Firm_orderActivity extends AppCompatActivity implements View.OnClic
         mQueue = Volley.newRequestQueue(this);
         init();
         setData();
+        setFace();
     }
     public void init(){
         this.camp_date = findViewById(R.id.camp_date);
@@ -80,6 +83,13 @@ public class Firm_orderActivity extends AppCompatActivity implements View.OnClic
         if(!IsLogin.getLogin_type(this)){
             return;
         }
+    }
+    //设置字体
+    protected void setFace(){
+        this.typeface = Typeface.createFromAsset(getAssets(),"fonts/PingFang.ttf");
+        this.title.setTypeface(typeface);
+        this.camp_date.setTypeface(typeface);
+        this.price.setTypeface(typeface);
     }
     /**
      * 给页面赋值

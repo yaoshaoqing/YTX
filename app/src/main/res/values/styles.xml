@@ -146,17 +146,33 @@
     </style>
     <!--对话框-->
     <style parent="@android:style/Theme.Dialog" name="base_dialog">
-    <item name="android:windowFrame">@null</item>
-    <!-- 边框 -->
-    <item name="android:windowIsFloating">true</item>
-    <!-- 是否浮现在activity之上 -->
-    <item name="android:windowIsTranslucent">true</item>
-    <!-- 半透明 -->
-    <item name="android:windowNoTitle">true</item>
-    <!-- 无标题 -->
-    <item name="android:windowBackground">@android:color/black</item>
-    <!-- 背景透明 -->
-    <item name="android:backgroundDimEnabled">true</item>
-    <!-- 模糊 -->
-</style>
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/black</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+    <style parent="@android:style/Theme.Dialog" name="personal_Relative">
+        <item name="android:layout_height">@dimen/y38</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="personal_Relative_first_img">
+        <item name="android:layout_height">@dimen/y18</item>
+        <item name="android:layout_width">@dimen/x35</item>
+        <item name="android:layout_marginRight">@dimen/x9</item>
+    </style>
+    <style name="personal_Relative_end_img">
+        <item name="android:layout_height">@dimen/y15</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
 </resources>

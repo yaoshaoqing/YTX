@@ -5,6 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -101,6 +104,7 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init();
+        //setAdapter();
         setHeightWidth();
     }
 
@@ -138,6 +142,7 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
             R.drawable.d,
             R.drawable.e
     };
+
     private void setAdapter(){
         //显示的小点
         dots = new ArrayList<View>();
@@ -149,7 +154,13 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
         dots.add(this.view.findViewById(R.id.dot_5));
 
         //title.setText(titles[0]);
-
+        //显示的图片
+//        images = new ArrayList<ImageView>();
+//        for(int i = 0; i < imageIds.length; i++){
+//            ImageView imageView = new ImageView(this.activity);
+//            imageView.setBackgroundResource(imageIds[i]);
+//            images.add(imageView);
+//        }
         adapter = new ViewPagerAdapter();
         mViewPaper.setAdapter(adapter);
 
@@ -214,7 +225,8 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
                             e.printStackTrace();
                         }
                         Bitmap BitmapStream = BitmapFactory.decodeStream(is);
-                        imageView.setImageBitmap(BitmapStream);
+                        BitmapDrawable   bitmapDrawable = new BitmapDrawable(BitmapStream);
+                        imageView.setBackground(bitmapDrawable);
                         images.add(imageView);
 
                     }

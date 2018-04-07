@@ -38,14 +38,13 @@
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="35dip"
             android:layout_gravity="bottom"
-            android:background="#33000000"
             android:gravity="center"
             android:orientation="vertical" >
 

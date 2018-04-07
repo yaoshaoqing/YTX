@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        android:orientation="vertical">
 
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="210dp"
@@ -21,53 +21,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="210dp" />
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/x14"
+            android:layout_marginRight="@dimen/x10"
+            >
         <RelativeLayout
             android:id="@+id/xiaoxi"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/personal_border"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
+            style="@style/personal_Relative"
+            >
             <ImageView
                 android:id="@+id/xiaoxiImg"
-                android:layout_width="40dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_first_img"
                 android:src="@drawable/xiaoxi2x" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/xiaoxiImg"
-                android:gravity="center_vertical"
+                android:layout_gravity="center"
                 android:text="消息中心"
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp"
+                style="@style/personal_Relative_end_img"
                 android:src="@drawable/jinru2x" />
         </RelativeLayout>
+        <View
+            style="@style/underline"
+            />
 
         <RelativeLayout
             android:id="@+id/order"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/personal_border"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/personal_Relative">
 
             <ImageView
                 android:id="@+id/orderImg"
-                android:layout_width="40dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_first_img"
                 android:src="@drawable/wodedingdan2x" />
 
             <TextView
@@ -79,27 +70,19 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_end_img"
                 android:src="@drawable/jinru2x" />
         </RelativeLayout>
-
+        <View
+            style="@style/underline"
+            />
         <RelativeLayout
             android:id="@+id/favorite"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/personal_border"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/personal_Relative">
 
             <ImageView
                 android:id="@+id/favoriteImg"
-                android:layout_width="40dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_first_img"
                 android:src="@drawable/shoucang2x" />
 
             <TextView
@@ -111,27 +94,19 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_end_img"
                 android:src="@drawable/jinru2x" />
         </RelativeLayout>
-
+        <View
+            style="@style/underline"
+            />
         <RelativeLayout
             android:id="@+id/coupon"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/personal_border"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/personal_Relative">
 
             <ImageView
                 android:id="@+id/couponImg"
-                android:layout_width="40dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_first_img"
                 android:src="@drawable/youhuiquan2x" />
 
             <TextView
@@ -143,13 +118,12 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_end_img"
                 android:src="@drawable/jinru2x" />
         </RelativeLayout>
-
+        <View
+            style="@style/underline"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
@@ -157,18 +131,11 @@
 
         <RelativeLayout
             android:id="@+id/info"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/personal_border"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/personal_Relative">
 
             <ImageView
                 android:id="@+id/infoImg"
-                android:layout_width="40dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_first_img"
                 android:src="@drawable/gerenxinxi2x" />
 
             <TextView
@@ -180,27 +147,19 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_end_img"
                 android:src="@drawable/jinru2x" />
         </RelativeLayout>
-
+        <View
+            style="@style/underline"
+            />
         <RelativeLayout
             android:id="@+id/set"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/personal_border"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            style="@style/personal_Relative">
 
             <ImageView
                 android:id="@+id/setImg"
-                android:layout_width="40dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_first_img"
                 android:src="@drawable/shezhi2x" />
 
             <TextView
@@ -212,12 +171,13 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                style="@style/personal_Relative_end_img"
                 android:src="@drawable/jinru2x" />
         </RelativeLayout>
+        <View
+            style="@style/underline"
+            />
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="49dp"></LinearLayout>

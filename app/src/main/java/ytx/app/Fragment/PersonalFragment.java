@@ -14,12 +14,14 @@ import ytx.app.R;
  */
 
 public class PersonalFragment extends BaseFragment{
-    protected View view;
+    protected View view = null;
     protected MainActivity activity;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.view = inflater.inflate(R.layout.personal_view,container,false);
+        if(this.view == null) {
+            this.view = inflater.inflate(R.layout.personal_view, container, false);
+        }
         return this.view;
     }
 

@@ -206,13 +206,13 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         public void handleMessage(Message msg) {
             if(msg.arg1 > 0) {
-                getcode.setText(msg.arg1+"秒");
+                getcode.setText(msg.arg1+"s");
                 getcode.setEnabled(false);
-                //getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.onclick_code));
+                getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.onclick_code));
             }else{
                 getcode.setText("获取验证码");
                 getcode.setEnabled(true);
-                //getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.resource_code));
+                getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.resource_code));
             }
 
         }

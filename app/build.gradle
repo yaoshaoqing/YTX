@@ -27,7 +27,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    //compile 'org.xutils:xutils:3.3.40'
+
     //testCompile 'junit:junit:4.12'
     //implementation files('libs/xutils-3.3.40-javadoc.jar')
     //implementation files('libs/volley-1.0.11.jar')

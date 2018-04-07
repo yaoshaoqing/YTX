@@ -52,6 +52,9 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         this.password = findViewById(R.id.password);
         this.conf_password = findViewById(R.id.Conf_password);
         this.submit = findViewById(R.id.submit);
+        this.getcode = findViewById(R.id.getcode);
+        this.getcode.setOnClickListener(this);
+        this.submit.setOnClickListener(this);
         Drawable username_drawable = getResources().getDrawable(R.drawable.yonghu);
         Drawable password_drawable = getResources().getDrawable(R.drawable.mima);
         Drawable code_drawable = getResources().getDrawable(R.drawable.code);
@@ -196,13 +199,13 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         @Override
         public void handleMessage(Message msg) {
             if(msg.arg1 > 0) {
-                getcode.setText(msg.arg1+"秒");
+                getcode.setText(msg.arg1+"s");
                 getcode.setEnabled(false);
-                //getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.onclick_code));
+                getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.onclick_code));
             }else{
                 getcode.setText("获取验证码");
                 getcode.setEnabled(true);
-                //getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.resource_code));
+                getcode.setBackgroundDrawable(getResources().getDrawable(R.drawable.resource_code));
             }
 
         }

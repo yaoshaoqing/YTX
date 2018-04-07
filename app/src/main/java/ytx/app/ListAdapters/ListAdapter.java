@@ -2,6 +2,7 @@ package ytx.app.ListAdapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +31,11 @@ public class ListAdapter extends BaseAdapter{
     private ViewHolder holder;
     private HashMap<Integer,ImageView> imageViewHashMap = new HashMap<Integer,ImageView>();
     private RequestQueue mQueue;
-    public ImageLoader imageLoader; //用来下载图片的类，后面有介绍
+
     public ListAdapter(Context context, List<Map<String,Object>> list){
         this.context = context;
-         mQueue = Volley.newRequestQueue(this.context);
+         //mQueue = Volley.newRequestQueue(this.context);
+
         this.list = list;
     }
 
