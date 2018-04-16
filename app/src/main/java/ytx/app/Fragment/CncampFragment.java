@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
  * Created by vi爱 on 2018/1/10.
  */
 
-public class CncampFragment extends BaseFragment implements AdapterView.OnItemClickListener{
+public class CncampFragment extends BaseFragment implements AdapterView.OnItemClickListener,SwipeRefreshLayout.OnRefreshListener{
     protected View view;
     protected MainActivity activity;
     protected ListView listView;
@@ -47,6 +48,7 @@ public class CncampFragment extends BaseFragment implements AdapterView.OnItemCl
     private boolean isPrepared;
     private boolean mHasLoadedOnce;
     protected RequestQueue mQueue;
+    protected SwipeRefreshLayout swipeRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,13 +86,16 @@ public class CncampFragment extends BaseFragment implements AdapterView.OnItemCl
         float editHeight = this.view.findViewById(R.id.toolbar).getLayoutParams().height;
         float OrderBy = this.view.findViewById(R.id.OrderBy).getLayoutParams().height;
         //float jingping = this.view.findViewById(R.id.linearImg).getLayoutParams().height;
-        LinearLayout.LayoutParams listviewLayoutParams = (LinearLayout.LayoutParams) this.view.findViewById(R.id.listview).getLayoutParams();
+        ViewGroup.LayoutParams SwipeRefreshParams = this.view.findViewById(R.id.SwipeRefreshLayout).getLayoutParams();
         int ListviewHeight = (int) (DisplayHeight-BarHeight-editHeight-OrderBy);
-        listviewLayoutParams.height = ListviewHeight;
+        SwipeRefreshParams.height = ListviewHeight;
     }
     protected void init(){
-        listView = view.findViewById(R.id.listview);
-        listView.setOnItemClickListener(this);
+        this.listView = view.findViewById(R.id.listview);
+        this.swipeRefreshLayout = this.view.findViewById(R.id.SwipeRefreshLayout);
+        this.swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorScheme(R.color.colorPrimary,R.color.colorAccent,R.color.colorPrimaryDark,R.color.colorAccent);
+        this.listView.setOnItemClickListener(this);
     }
 
     protected void adaper(){
@@ -218,6 +223,11 @@ public class CncampFragment extends BaseFragment implements AdapterView.OnItemCl
         startActivity(intent);
     }
 
+    @Override
+    public void onRefresh() {
+        lazyLoad();
+        swipeRefreshLayout.setRefreshing(false);
+    }
 }
 
 

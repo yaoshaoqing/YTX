@@ -15,16 +15,19 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -59,7 +62,7 @@ import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 /**
  * Created by vi爱 on 2018/1/10.
  */
-public class IndexFragment extends BaseFragment implements AdapterView.OnItemClickListener{
+public class IndexFragment extends BaseFragment implements AdapterView.OnItemClickListener,SwipeRefreshLayout.OnRefreshListener,AbsListView.OnScrollListener{
     protected View view = null;
     private ViewPager mViewPaper;
     private List<ImageView> images = new ArrayList<ImageView>();
@@ -85,6 +88,7 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
     private ScheduledExecutorService scheduledExecutorService;
     private boolean isPrepared;
     private boolean mHasLoadedOnce;
+    protected SwipeRefreshLayout swipeRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -112,7 +116,11 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
         mViewPaper = (ViewPager) this.view.findViewById(R.id.vp);
         //title = (TextView) this.view.findViewById(R.id.title);
         listView = this.view.findViewById(R.id.listview);
+        swipeRefreshLayout = this.view.findViewById(R.id.SwipeRefreshLayout);
         listView.setOnItemClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        listView.setOnScrollListener(this);
+        swipeRefreshLayout.setColorScheme(R.color.colorPrimary,R.color.colorAccent,R.color.colorPrimaryDark,R.color.colorAccent);
         EditText editText = this.view.findViewById(R.id.editext);
 //        RelativeLayout.LayoutParams editTextHeight = (RelativeLayout.LayoutParams) editText.getLayoutParams();
 //        LinearLayout.LayoutParams relativeHeight =(LinearLayout.LayoutParams) relative.getLayoutParams();
@@ -130,9 +138,10 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
         float editHeight = this.view.findViewById(R.id.toolbar).getLayoutParams().height;
         float ImagesHeight = this.view.findViewById(R.id.framelayout).getLayoutParams().height;
         float jingping = this.view.findViewById(R.id.linearImg).getLayoutParams().height;
-        LinearLayout.LayoutParams listviewLayoutParams = (LinearLayout.LayoutParams) this.view.findViewById(R.id.listview).getLayoutParams();
+        //float SwipeRefresh = this.view.findViewById(R.id.SwipeRefreshLayout).getLayoutParams().height;
+        ViewGroup.LayoutParams SwipeRefreshParams = this.view.findViewById(R.id.SwipeRefreshLayout).getLayoutParams();
         int ListviewHeight = (int) (DisplayHeight-BarHeight-editHeight-ImagesHeight-jingping);
-        listviewLayoutParams.height = ListviewHeight;
+        SwipeRefreshParams.height = ListviewHeight;
     }
     //存放图片的id
     private int[] imageIds = new int[]{
@@ -489,6 +498,22 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
 
         }
 
+    }
+
+    @Override
+    public void onRefresh() {
+        lazyLoad();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        Toast.makeText(this.activity,totalItemCount+"",Toast.LENGTH_SHORT).show();
     }
 
     /**
