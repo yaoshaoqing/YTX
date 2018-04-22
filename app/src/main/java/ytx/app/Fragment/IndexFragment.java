@@ -5,9 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,14 +18,11 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -51,10 +46,10 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import ytx.app.main.Camp_detailActivity;
+import ytx.app.Activity.Camp_detailActivity;
 import ytx.app.Http.GetPost.GetPostUtil;
 import ytx.app.ListAdapters.ListAdapter;
-import ytx.app.main.MainActivity;
+import ytx.app.Activity.MainActivity;
 import ytx.app.R;
 
 import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
@@ -62,7 +57,7 @@ import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 /**
  * Created by vi爱 on 2018/1/10.
  */
-public class IndexFragment extends BaseFragment implements AdapterView.OnItemClickListener,SwipeRefreshLayout.OnRefreshListener,AbsListView.OnScrollListener{
+public class IndexFragment extends BaseFragment implements AdapterView.OnItemClickListener,SwipeRefreshLayout.OnRefreshListener{
     protected View view = null;
     private ViewPager mViewPaper;
     private List<ImageView> images = new ArrayList<ImageView>();
@@ -89,6 +84,13 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
     private boolean isPrepared;
     private boolean mHasLoadedOnce;
     protected SwipeRefreshLayout swipeRefreshLayout;
+    public int last_index;
+    public int total_index;
+    public boolean isLoading = false;//表示是否正处于加载状态
+    public View loadmoreView;
+    public LayoutInflater inflater;
+    public ListAdapter listAdapter = null;
+    public int page=1;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -119,9 +121,9 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
         swipeRefreshLayout = this.view.findViewById(R.id.SwipeRefreshLayout);
         listView.setOnItemClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
-        listView.setOnScrollListener(this);
         swipeRefreshLayout.setColorScheme(R.color.colorPrimary,R.color.colorAccent,R.color.colorPrimaryDark,R.color.colorAccent);
         EditText editText = this.view.findViewById(R.id.editext);
+
 //        RelativeLayout.LayoutParams editTextHeight = (RelativeLayout.LayoutParams) editText.getLayoutParams();
 //        LinearLayout.LayoutParams relativeHeight =(LinearLayout.LayoutParams) relative.getLayoutParams();
 
@@ -262,7 +264,7 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
      * 列表数据
      */
     public void adaper(){
-        ListAdapter listAdapter = new ListAdapter(activity,list);
+        this.listAdapter = new ListAdapter(activity,list);
         listView.setAdapter(listAdapter);
     }
    // private Handler getImg = new Handler(){
@@ -467,8 +469,8 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("params1", "value1");
-                map.put("params2", "value2");
+                map.put("page", page+"");
+                //map.put("params2", "value2");
                 return map;
             }
         };
@@ -506,15 +508,6 @@ public class IndexFragment extends BaseFragment implements AdapterView.OnItemCli
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        Toast.makeText(this.activity,totalItemCount+"",Toast.LENGTH_SHORT).show();
-    }
 
     /**
      * 图片轮播功能

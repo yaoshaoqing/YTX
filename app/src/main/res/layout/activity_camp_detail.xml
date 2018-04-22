@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#efeff4"
-    tools:context="ytx.app.main.Camp_detailActivity">
+    tools:context="ytx.app.Activity.Camp_detailActivity">
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

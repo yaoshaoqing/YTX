@@ -38,7 +38,11 @@ public class ListAdapter extends BaseAdapter{
 
         this.list = list;
     }
-
+    public void updateView(List<Map<String,Object>> nowList)
+    {
+        this.list = nowList;
+        this.notifyDataSetChanged();//强制动态刷新数据进而调用getView方法
+    }
     @Override
     public int getCount() {
         return list.size();
