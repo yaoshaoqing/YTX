@@ -25,6 +25,21 @@
             android:textColor="#ffffff"
             android:gravity="center"
             />
+        <LinearLayout
+            android:layout_width="@dimen/x38"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:id="@+id/search"
+            >
+            <ImageView
+                android:layout_width="@dimen/x18"
+                android:layout_height="@dimen/y18"
+                android:background="@drawable/sousuo2x"
+
+                />
+        </LinearLayout>
+
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,4 +106,9 @@
         android:orientation="vertical"
         >
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/start"
+        android:layout_height="wrap_content"></LinearLayout>
 </LinearLayout>

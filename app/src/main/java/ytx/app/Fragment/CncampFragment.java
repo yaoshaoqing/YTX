@@ -153,8 +153,8 @@ public class CncampFragment extends BaseFragment implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //Toast.makeText(this.activity,list.get(position).get("title").toString().trim(),Toast.LENGTH_SHORT).show();
-        String campid = (String) list.get(position).get("id");
-        String title = (String) list.get(position).get("title");
+        String campid = (String) list.get(position-1).get("id");
+        String title = (String) list.get(position-1).get("title");
         Intent intent = new Intent();
         intent.putExtra("campid",campid);
         intent.putExtra("title",title);
