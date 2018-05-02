@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -461,43 +462,63 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
             switch (id){
                 case R.id.outdoors:
                     theme = 1;//户外拓展
+                    setThemeAllColor();
+                    setThemeColor(outdoors);
                     break;
                 case R.id.natural:
                     theme = 2;//自然探索
+                    setThemeAllColor();
+                    setThemeColor(natural);
                     break;
                 case R.id.sports:
                     theme = 3;//体育运动
+                    setThemeAllColor();
+                    setThemeColor(sports);
                     break;
                 case R.id.art:
                     theme = 4;//艺术人文
+                    setThemeAllColor();
+                    setThemeColor(art);
                     break;
                 case R.id.science:
                     theme = 6;//科学技术
+                    setThemeAllColor();
+                    setThemeColor(science);
                     break;
                 case R.id.military:
                     theme = 12;//军旅主题
+                    setThemeAllColor();
+                    setThemeColor(military);
                     break;
                 case R.id.language:
                     theme = 13;//语言提升
+                    setThemeAllColor();
+                    setThemeColor(language);
                     break;
                 case R.id.international:
                     theme = 16;//国际综合
+                    setThemeAllColor();
+                    setThemeColor(international);
                     break;
 
             }
         }
     }
-
-    public void setTheme(){
-        this.theme_all.setBackgroundColor(Color.parseColor("#ffffff"));//項目主題
-        this.outdoors.setBackgroundColor(Color.parseColor("#ffffff"));//户外拓展
-        this.natural.setBackgroundColor(Color.parseColor("#ffffff"));//自然探索
-        this.sports.setBackgroundColor(Color.parseColor("#ffffff"));//体育项目
-        this.art.setBackgroundColor(Color.parseColor("#ffffff"));//艺术人文
-        this.science.setBackgroundColor(Color.parseColor("#ffffff"));//科学技术
-        this.military.setBackgroundColor(Color.parseColor("#ffffff"));//军旅主题
-        this.language.setBackgroundColor(Color.parseColor("#ffffff"));//语言提升
-        this.international.setBackgroundColor(Color.parseColor("#ffffff"));//国际综合
+    //设置项目主题的颜色为白色
+    public void setThemeAllColor(){
+        this.theme_all.setBackgroundResource(R.drawable.search_text_border);//項目主題
+        this.outdoors.setBackgroundResource(R.drawable.search_text_border);//户外拓展
+        this.natural.setBackgroundResource(R.drawable.search_text_border);//自然探索
+        this.sports.setBackgroundResource(R.drawable.search_text_border);//体育项目
+        this.art.setBackgroundResource(R.drawable.search_text_border);//艺术人文
+        this.science.setBackgroundResource(R.drawable.search_text_border);//科学技术
+        this.military.setBackgroundResource(R.drawable.search_text_border);//军旅主题
+        this.language.setBackgroundResource(R.drawable.search_text_border);//语言提升
+        this.international.setBackgroundResource(R.drawable.search_text_border);//国际综合
+    }
+    public void setThemeColor(TextView v){
+        v.setBackgroundResource(R.drawable.search_text_checked_border);
+        v.setTextColor(Color.parseColor("#ffffff"));
     }
 }
 
