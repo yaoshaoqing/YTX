@@ -3,6 +3,7 @@ package ytx.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -67,6 +68,7 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
     public PullToRefreshListView PullTolistView;
     public ProgressDialog progressDialog;
     public LinearLayout search_popupwindow;
+    public View search_layout;
     protected TextView date_all;
     protected TextView summer;//夏令營
     protected TextView national;//十一營
@@ -81,6 +83,15 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
     protected TextView international;//国际综合
     protected TextView termini_all;//目的地
     protected TextView anhui;//安徽
+    protected TextView beijing;
+    protected int theme;//项目主题
+    protected int min_age;//最小年龄
+    protected int max_age;//最大年龄
+    protected int area;//地址
+    protected int holiday;//活动时间
+    protected int date_sort;//排序，按出发日期，默认为空，1为由近到远，2为由远到近
+    protected int price_sort;//排序，按价格，默认为空，1为由低到高，2为由高到低
+    protected TextView keyword;//搜索关键字
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(this.view == null){
@@ -364,7 +375,7 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
     private void showPopwindow() {
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-        View search_layout = inflater.inflate(R.layout.search_popupwindow, null);
+        search_layout = inflater.inflate(R.layout.search_popupwindow, null);
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
@@ -397,22 +408,39 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
 //                System.out.println("第一个按钮被点击了");
 //            }
 //        });
+        //
         //获取页面对像
-        search_layout.findViewById(R.id.date_all).setOnClickListener(new Click());//时间不限
-        search_layout.findViewById(R.id.summer).setOnClickListener(new Click());//夏令營
-        search_layout.findViewById(R.id.national).setOnClickListener(new Click());//十一營
-        search_layout.findViewById(R.id.theme_all).setOnClickListener(new Click());//項目主題
-        search_layout.findViewById(R.id.outdoors).setOnClickListener(new Click());//户外拓展
-        search_layout.findViewById(R.id.natural).setOnClickListener(new Click());//自然探索
-        search_layout.findViewById(R.id.sports).setOnClickListener(new Click());//体育项目
-        search_layout.findViewById(R.id.art).setOnClickListener(new Click());//艺术人文
-        search_layout.findViewById(R.id.science).setOnClickListener(new Click());//科学技术
-        search_layout.findViewById(R.id.military).setOnClickListener(new Click());//军旅主题
-        search_layout.findViewById(R.id.language).setOnClickListener(new Click());//语言提升
-        search_layout.findViewById(R.id.international).setOnClickListener(new Click());//国际综合
-        search_layout.findViewById(R.id.termini_all).setOnClickListener(new Click());//国际综合
-        search_layout.findViewById(R.id.anhui).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.beijing).setOnClickListener(new Click());
+        this.date_all = search_layout.findViewById(R.id.date_all);
+        this.summer = search_layout.findViewById(R.id.summer);//夏令營
+        this.national = search_layout.findViewById(R.id.national);//十一營
+        this.theme_all = search_layout.findViewById(R.id.theme_all);//項目主題
+        this.outdoors = search_layout.findViewById(R.id.outdoors);//户外拓展
+        this.natural = search_layout.findViewById(R.id.natural);//自然探索
+        this.sports = search_layout.findViewById(R.id.sports);//体育项目
+        this.art = search_layout.findViewById(R.id.art);//艺术人文
+        this.science = search_layout.findViewById(R.id.science);//科学技术
+        this.military = search_layout.findViewById(R.id.military);//军旅主题
+        this.language = search_layout.findViewById(R.id.language);//语言提升
+        this.international = search_layout.findViewById(R.id.international);//国际综合
+        this.termini_all = search_layout.findViewById(R.id.termini_all);//目的地  不限
+        this.anhui = search_layout.findViewById(R.id.anhui);
+        this.beijing = search_layout.findViewById(R.id.beijing);
+        //设置监听事件事件
+        this.date_all.setOnClickListener(new Click());//时间不限
+        this.summer.setOnClickListener(new Click());//夏令營
+        this.national.setOnClickListener(new Click());//十一營
+        this.theme_all.setOnClickListener(new Click());//項目主題
+        this.outdoors.setOnClickListener(new Click());//户外拓展
+        this.natural.setOnClickListener(new Click());//自然探索
+        this.sports.setOnClickListener(new Click());//体育项目
+        this.art.setOnClickListener(new Click());//艺术人文
+        this.science.setOnClickListener(new Click());//科学技术
+        this.military.setOnClickListener(new Click());//军旅主题
+        this.language.setOnClickListener(new Click());//语言提升
+        this.international.setOnClickListener(new Click());//国际综合
+        this.termini_all.setOnClickListener(new Click());//目的地  不限
+        this.anhui.setOnClickListener(new Click());;
+        this.beijing.setOnClickListener(new Click());;
         //popWindow消失监听方法
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
@@ -429,8 +457,47 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(GncampFragment.this.activity,"活动时间的不限被点击了",Toast.LENGTH_SHORT).show();
+            int id = v.getId();
+            switch (id){
+                case R.id.outdoors:
+                    theme = 1;//户外拓展
+                    break;
+                case R.id.natural:
+                    theme = 2;//自然探索
+                    break;
+                case R.id.sports:
+                    theme = 3;//体育运动
+                    break;
+                case R.id.art:
+                    theme = 4;//艺术人文
+                    break;
+                case R.id.science:
+                    theme = 6;//科学技术
+                    break;
+                case R.id.military:
+                    theme = 12;//军旅主题
+                    break;
+                case R.id.language:
+                    theme = 13;//语言提升
+                    break;
+                case R.id.international:
+                    theme = 16;//国际综合
+                    break;
+
+            }
         }
+    }
+
+    public void setTheme(){
+        this.theme_all.setBackgroundColor(Color.parseColor("#ffffff"));//項目主題
+        this.outdoors.setBackgroundColor(Color.parseColor("#ffffff"));//户外拓展
+        this.natural.setBackgroundColor(Color.parseColor("#ffffff"));//自然探索
+        this.sports.setBackgroundColor(Color.parseColor("#ffffff"));//体育项目
+        this.art.setBackgroundColor(Color.parseColor("#ffffff"));//艺术人文
+        this.science.setBackgroundColor(Color.parseColor("#ffffff"));//科学技术
+        this.military.setBackgroundColor(Color.parseColor("#ffffff"));//军旅主题
+        this.language.setBackgroundColor(Color.parseColor("#ffffff"));//语言提升
+        this.international.setBackgroundColor(Color.parseColor("#ffffff"));//国际综合
     }
 }
 
