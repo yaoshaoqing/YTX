@@ -398,19 +398,19 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
 //            }
 //        });
         //获取页面对像
-        search_layout.findViewById(R.id.date_all).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.summer).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.national).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.theme_all).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.outdoors).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.natural).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.sports).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.art).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.science).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.military).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.language).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.international).setOnClickListener(new Click());
-        search_layout.findViewById(R.id.termini_all).setOnClickListener(new Click());
+        search_layout.findViewById(R.id.date_all).setOnClickListener(new Click());//时间不限
+        search_layout.findViewById(R.id.summer).setOnClickListener(new Click());//夏令營
+        search_layout.findViewById(R.id.national).setOnClickListener(new Click());//十一營
+        search_layout.findViewById(R.id.theme_all).setOnClickListener(new Click());//項目主題
+        search_layout.findViewById(R.id.outdoors).setOnClickListener(new Click());//户外拓展
+        search_layout.findViewById(R.id.natural).setOnClickListener(new Click());//自然探索
+        search_layout.findViewById(R.id.sports).setOnClickListener(new Click());//体育项目
+        search_layout.findViewById(R.id.art).setOnClickListener(new Click());//艺术人文
+        search_layout.findViewById(R.id.science).setOnClickListener(new Click());//科学技术
+        search_layout.findViewById(R.id.military).setOnClickListener(new Click());//军旅主题
+        search_layout.findViewById(R.id.language).setOnClickListener(new Click());//语言提升
+        search_layout.findViewById(R.id.international).setOnClickListener(new Click());//国际综合
+        search_layout.findViewById(R.id.termini_all).setOnClickListener(new Click());//国际综合
         search_layout.findViewById(R.id.anhui).setOnClickListener(new Click());
         search_layout.findViewById(R.id.beijing).setOnClickListener(new Click());
         //popWindow消失监听方法
