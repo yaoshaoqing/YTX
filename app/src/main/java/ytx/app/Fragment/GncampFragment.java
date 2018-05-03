@@ -409,7 +409,38 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
 //                System.out.println("第一个按钮被点击了");
 //            }
 //        });
-        //
+        //循环设置点击事件
+        Click  click = new Click();
+        LinearLayout select_theme_layout_1 = search_layout.findViewById(R.id.select_theme_layout_1);
+        int layout_1 = select_theme_layout_1.getChildCount();
+        for(int i=0;i<layout_1;i++){
+            View v = select_theme_layout_1.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_theme_layout_2 = search_layout.findViewById(R.id.select_theme_layout_2);
+        int layout_2 = select_theme_layout_2.getChildCount();
+        for(int i=0;i<layout_2;i++){
+            View v = select_theme_layout_2.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_theme_layout_3 = search_layout.findViewById(R.id.select_theme_layout_3);
+        int layout_3 = select_theme_layout_3.getChildCount();
+        for(int i=0;i<layout_3;i++){
+            View v = select_theme_layout_3.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_date_layout = search_layout.findViewById(R.id.select_date_layout);
+        int index = select_date_layout.getChildCount();
+        for(int i=0;i<index;i++){
+            View v = select_date_layout.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_termini_layout = search_layout.findViewById(R.id.select_termini);
+        int termini_layout = select_termini_layout.getChildCount();
+        for(int i=0;i<termini_layout;i++){
+            View v = select_termini_layout.getChildAt(i);
+            v.setOnClickListener(click);
+        }
         //获取页面对像
         this.date_all = search_layout.findViewById(R.id.date_all);
         this.summer = search_layout.findViewById(R.id.summer);//夏令營
@@ -427,21 +458,21 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
         this.anhui = search_layout.findViewById(R.id.anhui);
         this.beijing = search_layout.findViewById(R.id.beijing);
         //设置监听事件事件
-        this.date_all.setOnClickListener(new Click());//时间不限
-        this.summer.setOnClickListener(new Click());//夏令營
-        this.national.setOnClickListener(new Click());//十一營
-        this.theme_all.setOnClickListener(new Click());//項目主題
-        this.outdoors.setOnClickListener(new Click());//户外拓展
-        this.natural.setOnClickListener(new Click());//自然探索
-        this.sports.setOnClickListener(new Click());//体育项目
-        this.art.setOnClickListener(new Click());//艺术人文
-        this.science.setOnClickListener(new Click());//科学技术
-        this.military.setOnClickListener(new Click());//军旅主题
-        this.language.setOnClickListener(new Click());//语言提升
-        this.international.setOnClickListener(new Click());//国际综合
-        this.termini_all.setOnClickListener(new Click());//目的地  不限
-        this.anhui.setOnClickListener(new Click());;
-        this.beijing.setOnClickListener(new Click());;
+//        this.date_all.setOnClickListener(new Click());//时间不限
+//        this.summer.setOnClickListener(new Click());//夏令營
+//        this.national.setOnClickListener(new Click());//十一營
+//        this.theme_all.setOnClickListener(new Click());//項目主題
+//        this.outdoors.setOnClickListener(new Click());//户外拓展
+//        this.natural.setOnClickListener(new Click());//自然探索
+//        this.sports.setOnClickListener(new Click());//体育项目
+//        this.art.setOnClickListener(new Click());//艺术人文
+//        this.science.setOnClickListener(new Click());//科学技术
+//        this.military.setOnClickListener(new Click());//军旅主题
+//        this.language.setOnClickListener(new Click());//语言提升
+//        this.international.setOnClickListener(new Click());//国际综合
+//        this.termini_all.setOnClickListener(new Click());//目的地  不限
+//        this.anhui.setOnClickListener(new Click());;
+//        this.beijing.setOnClickListener(new Click());;
         //popWindow消失监听方法
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
 
@@ -463,42 +494,71 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
                 case R.id.outdoors:
                     theme = 1;//户外拓展
                     setThemeAllColor();
-                    setThemeColor(outdoors);
+                    setThemeClickColor(outdoors);
                     break;
                 case R.id.natural:
                     theme = 2;//自然探索
                     setThemeAllColor();
-                    setThemeColor(natural);
+                    setThemeClickColor(natural);
                     break;
                 case R.id.sports:
                     theme = 3;//体育运动
                     setThemeAllColor();
-                    setThemeColor(sports);
+                    setThemeClickColor(sports);
                     break;
                 case R.id.art:
                     theme = 4;//艺术人文
                     setThemeAllColor();
-                    setThemeColor(art);
+                    setThemeClickColor(art);
                     break;
                 case R.id.science:
                     theme = 6;//科学技术
                     setThemeAllColor();
-                    setThemeColor(science);
+                    setThemeClickColor(science);
                     break;
                 case R.id.military:
                     theme = 12;//军旅主题
                     setThemeAllColor();
-                    setThemeColor(military);
+                    setThemeClickColor(military);
                     break;
                 case R.id.language:
                     theme = 13;//语言提升
                     setThemeAllColor();
-                    setThemeColor(language);
+                    setThemeClickColor(language);
                     break;
                 case R.id.international:
                     theme = 16;//国际综合
                     setThemeAllColor();
-                    setThemeColor(international);
+                    setThemeClickColor(international);
+                    break;
+                case R.id.theme_all:
+                    theme = ' ';
+                    setThemeAllColor();
+                    setThemeClickColor(theme_all);
+                    break;
+                case R.id.summer://夏令营
+                    setDateAllColor();
+                    setDateClickColor(summer);
+                    break;
+                case R.id.national://十一营
+                    setDateAllColor();
+                    setDateClickColor(national);
+                    break;
+                case R.id.date_all://不限
+                    setDateAllColor();
+                    setDateClickColor(date_all);
+                    break;
+                case R.id.termini_all://目的地
+                    setTerminiAllColor();
+                    setTerminiClickColor(termini_all);
+                    break;
+                case R.id.anhui:
+                    setTerminiAllColor();
+                    setTerminiClickColor(anhui);
+                    break;
+                case R.id.beijing:
+                    setTerminiAllColor();
+                    setTerminiClickColor(beijing);
                     break;
 
             }
@@ -506,17 +566,79 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
     }
     //设置项目主题的颜色为白色
     public void setThemeAllColor(){
-        this.theme_all.setBackgroundResource(R.drawable.search_text_border);//項目主題
-        this.outdoors.setBackgroundResource(R.drawable.search_text_border);//户外拓展
-        this.natural.setBackgroundResource(R.drawable.search_text_border);//自然探索
-        this.sports.setBackgroundResource(R.drawable.search_text_border);//体育项目
-        this.art.setBackgroundResource(R.drawable.search_text_border);//艺术人文
-        this.science.setBackgroundResource(R.drawable.search_text_border);//科学技术
-        this.military.setBackgroundResource(R.drawable.search_text_border);//军旅主题
-        this.language.setBackgroundResource(R.drawable.search_text_border);//语言提升
-        this.international.setBackgroundResource(R.drawable.search_text_border);//国际综合
+        //设置字体边框背景
+//        this.theme_all.setBackgroundResource(R.drawable.search_text_border);//項目主題
+//        this.theme_all.setTextAppearance(GncampFragment.this.activity,R.style.search_text);
+//        this.outdoors.setBackgroundResource(R.drawable.search_text_border);//户外拓展
+//        this.natural.setBackgroundResource(R.drawable.search_text_border);//自然探索
+//        this.sports.setBackgroundResource(R.drawable.search_text_border);//体育项目
+//        this.art.setBackgroundResource(R.drawable.search_text_border);//艺术人文
+//        this.science.setBackgroundResource(R.drawable.search_text_border);//科学技术
+//        this.military.setBackgroundResource(R.drawable.search_text_border);//军旅主题
+//        this.language.setBackgroundResource(R.drawable.search_text_border);//语言提升
+//        this.international.setBackgroundResource(R.drawable.search_text_border);//国际综合
+        LinearLayout select_theme_layout_1 = search_layout.findViewById(R.id.select_theme_layout_1);
+        int layout_1 = select_theme_layout_1.getChildCount();
+        for(int i=0;i<layout_1;i++){
+            View v = select_theme_layout_1.getChildAt(i);
+            v.setBackgroundResource(R.drawable.search_text_border);
+        }
+        LinearLayout select_theme_layout_2 = search_layout.findViewById(R.id.select_theme_layout_2);
+        int layout_2 = select_theme_layout_2.getChildCount();
+        for(int i=0;i<layout_2;i++){
+            View v = select_theme_layout_2.getChildAt(i);
+            v.setBackgroundResource(R.drawable.search_text_border);
+        }
+        LinearLayout select_theme_layout_3 = search_layout.findViewById(R.id.select_theme_layout_3);
+        int layout_3 = select_theme_layout_3.getChildCount();
+        for(int i=0;i<layout_3;i++){
+            View v = select_theme_layout_3.getChildAt(i);
+            v.setBackgroundResource(R.drawable.search_text_border);
+            //TextView textView = new TextView(getContext());
+        }
+        //设置字体颜色
+        this.theme_all.setTextColor(Color.parseColor("#333333"));
+        this.outdoors.setTextColor(Color.parseColor("#333333"));//户外拓展
+        this.natural.setTextColor(Color.parseColor("#333333"));//自然探索
+        this.sports.setTextColor(Color.parseColor("#333333"));//体育项目
+        this.art.setTextColor(Color.parseColor("#333333"));//艺术人文
+        this.science.setTextColor(Color.parseColor("#333333"));//科学技术
+        this.military.setTextColor(Color.parseColor("#333333"));//军旅主题
+        this.language.setTextColor(Color.parseColor("#333333"));//语言提升
+        this.international.setTextColor(Color.parseColor("#333333"));//国际综合
     }
-    public void setThemeColor(TextView v){
+    //设置项目主题点击后的颜色
+    public void setThemeClickColor(TextView v){
+        v.setBackgroundResource(R.drawable.search_text_checked_border);
+        v.setTextColor(Color.parseColor("#ffffff"));
+    }
+    //活动时间
+    public void setDateAllColor(){
+        LinearLayout select_date_layout = search_layout.findViewById(R.id.select_date_layout);
+        int index = select_date_layout.getChildCount();
+        for(int i=0;i<index;i++){
+            View v = select_date_layout.getChildAt(i);
+            v.setBackgroundResource(R.drawable.search_text_border);
+        }
+    }
+    //设置活动时间点击后的颜色
+    public void setDateClickColor(TextView v){
+        v.setBackgroundResource(R.drawable.search_text_checked_border);
+        v.setTextColor(Color.parseColor("#ffffff"));
+    }
+
+    //设置目的地颜色
+    public void setTerminiAllColor(){
+        LinearLayout select_termini_layout = search_layout.findViewById(R.id.select_termini);
+        int index = select_termini_layout.getChildCount();
+        for(int i=0;i<index;i++){
+            View v = select_termini_layout.getChildAt(i);
+            v.setBackgroundResource(R.drawable.search_text_border);
+        }
+    }
+
+    //设置目的地点击后的颜色
+    public void setTerminiClickColor(TextView v){
         v.setBackgroundResource(R.drawable.search_text_checked_border);
         v.setTextColor(Color.parseColor("#ffffff"));
     }

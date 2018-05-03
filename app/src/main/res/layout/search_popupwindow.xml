@@ -14,6 +14,7 @@
         android:layout_marginRight="@dimen/x9"
         android:layout_marginLeft="@dimen/x9"
         >
+        <!--活动时间-->
         <TextView
             style="@style/search_item"
             android:text="活动时间"
@@ -25,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/select_date_layout"
             android:layout_marginTop="@dimen/y14"
             >
             <TextView
@@ -51,6 +53,7 @@
             android:layout_marginTop="@dimen/y10"
             android:layout_marginBottom="@dimen/y10"
             android:background="#d5d7de" />
+        <!--适合年龄-->
         <TextView
             style="@style/search_item"
             android:layout_below="@+id/date_downline"
@@ -61,6 +64,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/y14"
+            android:id="@+id/select_age_layout"
             >
 
         </LinearLayout>
@@ -72,6 +77,7 @@
             android:layout_marginBottom="@dimen/y10"
             android:id="@+id/age_downline"
             android:background="#d5d7de" />
+        <!--项目主题-->
         <TextView
             style="@style/search_item"
             android:id="@+id/theme"
@@ -81,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/select_theme_layout_1"
             android:layout_marginTop="@dimen/y14"
             >
             <TextView
@@ -103,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/select_theme2"
+            android:id="@+id/select_theme_layout_2"
             android:layout_marginTop="@dimen/y14"
             >
             <TextView
@@ -126,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/select_theme3"
+            android:id="@+id/select_theme_layout_3"
             android:layout_marginTop="@dimen/y14"
             >
             <TextView
@@ -153,6 +160,7 @@
             android:layout_marginBottom="@dimen/y10"
             android:id="@+id/theme_downline"
             android:background="#d5d7de" />
+        <!--目的地-->
         <TextView
             style="@style/search_item"
             android:id="@+id/termini"
@@ -192,6 +200,7 @@
         android:layout_height="0.001dp"
         android:layout_above="@+id/bottom"
         android:background="#d5d7de" />
+    <!--提交或重置-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/y47"
@@ -202,7 +211,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:text="重置"
             android:layout_weight="1"
             android:background="#ffffff"
@@ -211,7 +220,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="确定"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:background="#4cb335"
             android:textColor="#ffffff"
             android:layout_weight="1"

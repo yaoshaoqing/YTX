@@ -5,7 +5,7 @@
     <!--描边-->
     <stroke
         android:width="0.01dp"
-        android:color="#666666" />
+        android:color="#43b335" />
 
     <!-- 这个可以不加，padding用不上
     <padding
@@ -15,9 +15,9 @@
         android:top="0dp" /> -->
     <!-- 圆角 -->
     <corners
-        android:bottomLeftRadius="7dp"
-        android:bottomRightRadius="7dp"
-        android:topLeftRadius="7dp"
-        android:topRightRadius="7dp" />
+        android:bottomLeftRadius="6dp"
+        android:bottomRightRadius="6dp"
+        android:topLeftRadius="6dp"
+        android:topRightRadius="6dp" />
 
 </shape>
