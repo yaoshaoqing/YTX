@@ -67,7 +67,9 @@
             android:layout_marginTop="@dimen/y14"
             android:id="@+id/select_age_layout"
             >
-
+        <ytx.app.View.RangeProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y20" />
         </LinearLayout>
         <View
             android:layout_gravity="center_horizontal"
@@ -212,6 +214,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="22sp"
+            android:id="@+id/initialize"
             android:text="重置"
             android:layout_weight="1"
             android:background="#ffffff"

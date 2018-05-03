@@ -59,7 +59,6 @@ import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 public class GncampFragment extends BaseFragment implements AdapterView.OnItemClickListener,View.OnClickListener{
     protected View view;
     protected MainActivity activity;
-    protected ListView listView;
     protected List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
     private boolean isPrepared;
     private boolean mHasLoadedOnce;
@@ -85,14 +84,15 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
     protected TextView termini_all;//目的地
     protected TextView anhui;//安徽
     protected TextView beijing;
-    protected int theme;//项目主题
-    protected int min_age;//最小年龄
-    protected int max_age;//最大年龄
-    protected int area;//地址
-    protected int holiday;//活动时间
-    protected int date_sort;//排序，按出发日期，默认为空，1为由近到远，2为由远到近
-    protected int price_sort;//排序，按价格，默认为空，1为由低到高，2为由高到低
+    protected Integer theme;//项目主题
+    protected Integer min_age;//最小年龄
+    protected Integer max_age;//最大年龄
+    protected Integer area;//地址
+    protected Integer holiday;//活动时间
+    protected Integer date_sort;//排序，按出发日期，默认为空，1为由近到远，2为由远到近
+    protected Integer price_sort;//排序，按价格，默认为空，1为由低到高，2为由高到低
     protected TextView keyword;//搜索关键字
+    public PopupWindow window;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(this.view == null){
@@ -379,114 +379,54 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
         search_layout = inflater.inflate(R.layout.search_popupwindow, null);
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
-
-        PopupWindow window = new PopupWindow(search_layout,
+        window = new PopupWindow(search_layout,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
 
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(true);
 
-
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);
-
 
         // 设置popWindow的显示和消失动画
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
         // 在底部显示
         window.showAtLocation(GncampFragment.this.view.findViewById(R.id.start),
                 Gravity.BOTTOM, 0, 0);
-
-        // 这里检验popWindow里的button是否可以点击
-//        Button first = (Button) search_layout.findViewById(R.id.first);
-//        first.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                System.out.println("第一个按钮被点击了");
-//            }
-//        });
-        //循环设置点击事件
-        Click  click = new Click();
-        LinearLayout select_theme_layout_1 = search_layout.findViewById(R.id.select_theme_layout_1);
-        int layout_1 = select_theme_layout_1.getChildCount();
-        for(int i=0;i<layout_1;i++){
-            View v = select_theme_layout_1.getChildAt(i);
-            v.setOnClickListener(click);
-        }
-        LinearLayout select_theme_layout_2 = search_layout.findViewById(R.id.select_theme_layout_2);
-        int layout_2 = select_theme_layout_2.getChildCount();
-        for(int i=0;i<layout_2;i++){
-            View v = select_theme_layout_2.getChildAt(i);
-            v.setOnClickListener(click);
-        }
-        LinearLayout select_theme_layout_3 = search_layout.findViewById(R.id.select_theme_layout_3);
-        int layout_3 = select_theme_layout_3.getChildCount();
-        for(int i=0;i<layout_3;i++){
-            View v = select_theme_layout_3.getChildAt(i);
-            v.setOnClickListener(click);
-        }
-        LinearLayout select_date_layout = search_layout.findViewById(R.id.select_date_layout);
-        int index = select_date_layout.getChildCount();
-        for(int i=0;i<index;i++){
-            View v = select_date_layout.getChildAt(i);
-            v.setOnClickListener(click);
-        }
-        LinearLayout select_termini_layout = search_layout.findViewById(R.id.select_termini);
-        int termini_layout = select_termini_layout.getChildCount();
-        for(int i=0;i<termini_layout;i++){
-            View v = select_termini_layout.getChildAt(i);
-            v.setOnClickListener(click);
-        }
-        //获取页面对像
-        this.date_all = search_layout.findViewById(R.id.date_all);
-        this.summer = search_layout.findViewById(R.id.summer);//夏令營
-        this.national = search_layout.findViewById(R.id.national);//十一營
-        this.theme_all = search_layout.findViewById(R.id.theme_all);//項目主題
-        this.outdoors = search_layout.findViewById(R.id.outdoors);//户外拓展
-        this.natural = search_layout.findViewById(R.id.natural);//自然探索
-        this.sports = search_layout.findViewById(R.id.sports);//体育项目
-        this.art = search_layout.findViewById(R.id.art);//艺术人文
-        this.science = search_layout.findViewById(R.id.science);//科学技术
-        this.military = search_layout.findViewById(R.id.military);//军旅主题
-        this.language = search_layout.findViewById(R.id.language);//语言提升
-        this.international = search_layout.findViewById(R.id.international);//国际综合
-        this.termini_all = search_layout.findViewById(R.id.termini_all);//目的地  不限
-        this.anhui = search_layout.findViewById(R.id.anhui);
-        this.beijing = search_layout.findViewById(R.id.beijing);
-        //设置监听事件事件
-//        this.date_all.setOnClickListener(new Click());//时间不限
-//        this.summer.setOnClickListener(new Click());//夏令營
-//        this.national.setOnClickListener(new Click());//十一營
-//        this.theme_all.setOnClickListener(new Click());//項目主題
-//        this.outdoors.setOnClickListener(new Click());//户外拓展
-//        this.natural.setOnClickListener(new Click());//自然探索
-//        this.sports.setOnClickListener(new Click());//体育项目
-//        this.art.setOnClickListener(new Click());//艺术人文
-//        this.science.setOnClickListener(new Click());//科学技术
-//        this.military.setOnClickListener(new Click());//军旅主题
-//        this.language.setOnClickListener(new Click());//语言提升
-//        this.international.setOnClickListener(new Click());//国际综合
-//        this.termini_all.setOnClickListener(new Click());//目的地  不限
-//        this.anhui.setOnClickListener(new Click());;
-//        this.beijing.setOnClickListener(new Click());;
+        //确定监听事件
+        search_layout.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+                System.out.println(holiday);
+                System.out.println(theme);
+                System.out.println(area);
+            }
+        });
+        //重置监听事件
+        search_layout.findViewById(R.id.initialize).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialize();
+            }
+        });
         //popWindow消失监听方法
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
             @Override
             public void onDismiss() {
-                System.out.println("popWindow消失");
+                //System.out.println("popWindow消失");
             }
         });
 
-
+        //设置监听事件
+        click();
+        //初始值
+        initialize();
     }
 
     class Click implements View.OnClickListener {
-
         @Override
         public void onClick(View v) {
             int id = v.getId();
@@ -532,17 +472,19 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
                     setThemeClickColor(international);
                     break;
                 case R.id.theme_all:
-                    theme = ' ';
+                    theme = null;
                     setThemeAllColor();
                     setThemeClickColor(theme_all);
                     break;
                 case R.id.summer://夏令营
                     setDateAllColor();
                     setDateClickColor(summer);
+                    holiday = 11;
                     break;
                 case R.id.national://十一营
                     setDateAllColor();
                     setDateClickColor(national);
+                    holiday = 12;
                     break;
                 case R.id.date_all://不限
                     setDateAllColor();
@@ -560,6 +502,7 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
                     setTerminiAllColor();
                     setTerminiClickColor(beijing);
                     break;
+
 
             }
         }
@@ -607,11 +550,15 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
         this.language.setTextColor(Color.parseColor("#333333"));//语言提升
         this.international.setTextColor(Color.parseColor("#333333"));//国际综合
     }
+
+
     //设置项目主题点击后的颜色
     public void setThemeClickColor(TextView v){
         v.setBackgroundResource(R.drawable.search_text_checked_border);
         v.setTextColor(Color.parseColor("#ffffff"));
     }
+
+
     //活动时间
     public void setDateAllColor(){
         LinearLayout select_date_layout = search_layout.findViewById(R.id.select_date_layout);
@@ -620,12 +567,18 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
             View v = select_date_layout.getChildAt(i);
             v.setBackgroundResource(R.drawable.search_text_border);
         }
+        this.date_all.setTextColor(Color.parseColor("#333333"));
+        this.summer.setTextColor(Color.parseColor("#333333"));
+        this.national.setTextColor(Color.parseColor("#333333"));
     }
+
+
     //设置活动时间点击后的颜色
     public void setDateClickColor(TextView v){
         v.setBackgroundResource(R.drawable.search_text_checked_border);
         v.setTextColor(Color.parseColor("#ffffff"));
     }
+
 
     //设置目的地颜色
     public void setTerminiAllColor(){
@@ -635,12 +588,89 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
             View v = select_termini_layout.getChildAt(i);
             v.setBackgroundResource(R.drawable.search_text_border);
         }
+        this.termini_all.setTextColor(Color.parseColor("#333333"));
+        this.anhui.setTextColor(Color.parseColor("#333333"));
+        this.beijing.setTextColor(Color.parseColor("#333333"));
     }
+
 
     //设置目的地点击后的颜色
     public void setTerminiClickColor(TextView v){
         v.setBackgroundResource(R.drawable.search_text_checked_border);
         v.setTextColor(Color.parseColor("#ffffff"));
+    }
+
+
+    //初始化
+    public void initialize(){
+
+        setDateAllColor();
+        setThemeAllColor();
+        setTerminiAllColor();
+        //设置初始值
+        this.date_all.setTextColor(Color.parseColor("#ffffff"));
+        this.theme_all.setTextColor(Color.parseColor("#ffffff"));
+        this.termini_all.setTextColor(Color.parseColor("#ffffff"));
+        this.date_all.setBackgroundResource(R.drawable.search_text_checked_border);
+        this.termini_all.setBackgroundResource(R.drawable.search_text_checked_border);
+        this.theme_all.setBackgroundResource(R.drawable.search_text_checked_border);
+        this.theme = null;
+        this.holiday = null;
+        this.area = null;
+
+    }
+
+
+    public void click(){
+        //循环设置监听事件事件
+        Click  click = new Click();
+        LinearLayout select_theme_layout_1 = search_layout.findViewById(R.id.select_theme_layout_1);
+        int layout_1 = select_theme_layout_1.getChildCount();
+        for(int i=0;i<layout_1;i++){
+            View v = select_theme_layout_1.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_theme_layout_2 = search_layout.findViewById(R.id.select_theme_layout_2);
+        int layout_2 = select_theme_layout_2.getChildCount();
+        for(int i=0;i<layout_2;i++){
+            View v = select_theme_layout_2.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_theme_layout_3 = search_layout.findViewById(R.id.select_theme_layout_3);
+        int layout_3 = select_theme_layout_3.getChildCount();
+        for(int i=0;i<layout_3;i++){
+            View v = select_theme_layout_3.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_date_layout = search_layout.findViewById(R.id.select_date_layout);
+        int index = select_date_layout.getChildCount();
+        for(int i=0;i<index;i++){
+            View v = select_date_layout.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+        LinearLayout select_termini_layout = search_layout.findViewById(R.id.select_termini);
+        int termini_layout = select_termini_layout.getChildCount();
+        for(int i=0;i<termini_layout;i++){
+            View v = select_termini_layout.getChildAt(i);
+            v.setOnClickListener(click);
+        }
+
+        //获取页面对像
+        this.date_all = search_layout.findViewById(R.id.date_all);
+        this.summer = search_layout.findViewById(R.id.summer);//夏令營
+        this.national = search_layout.findViewById(R.id.national);//十一營
+        this.theme_all = search_layout.findViewById(R.id.theme_all);//項目主題
+        this.outdoors = search_layout.findViewById(R.id.outdoors);//户外拓展
+        this.natural = search_layout.findViewById(R.id.natural);//自然探索
+        this.sports = search_layout.findViewById(R.id.sports);//体育项目
+        this.art = search_layout.findViewById(R.id.art);//艺术人文
+        this.science = search_layout.findViewById(R.id.science);//科学技术
+        this.military = search_layout.findViewById(R.id.military);//军旅主题
+        this.language = search_layout.findViewById(R.id.language);//语言提升
+        this.international = search_layout.findViewById(R.id.international);//国际综合
+        this.termini_all = search_layout.findViewById(R.id.termini_all);//目的地  不限
+        this.anhui = search_layout.findViewById(R.id.anhui);
+        this.beijing = search_layout.findViewById(R.id.beijing);
     }
 }
 
