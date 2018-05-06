@@ -1,11 +1,9 @@
 package ytx.app.Fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -45,10 +42,10 @@ import java.util.List;
 import java.util.Map;
 
 import ytx.app.Activity.Camp_detailActivity;
-import ytx.app.Http.GetPost.GetPostUtil;
 import ytx.app.ListAdapters.ListAdapter;
 import ytx.app.Activity.MainActivity;
 import ytx.app.R;
+import ytx.app.View.TwoWayRattingBar;
 
 import static ytx.app.Config.MyAppApiConfig.INTERFACE_URL;
 
@@ -84,15 +81,16 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
     protected TextView termini_all;//目的地
     protected TextView anhui;//安徽
     protected TextView beijing;
-    protected Integer theme;//项目主题
-    protected Integer min_age;//最小年龄
-    protected Integer max_age;//最大年龄
-    protected Integer area;//地址
-    protected Integer holiday;//活动时间
+    protected Integer theme = null;//项目主题
+    protected Integer min_age = null;//最小年龄
+    protected Integer max_age = null;//最大年龄
+    protected Integer area = null;//地址
+    protected Integer holiday = null;//活动时间
     protected Integer date_sort;//排序，按出发日期，默认为空，1为由近到远，2为由远到近
     protected Integer price_sort;//排序，按价格，默认为空，1为由低到高，2为由高到低
     protected TextView keyword;//搜索关键字
     public PopupWindow window;
+    protected TwoWayRattingBar twoWayRattingBar;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(this.view == null){
@@ -112,6 +110,7 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
         init();
         pullToRefresh();
         setHeightWidth();
+
     }
 
     public void pullToRefresh(){
@@ -353,6 +352,18 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("page", page+"");
                 map.put("camp_type", "1");
+                if(holiday  != null){
+                    map.put("holiday", holiday+"");
+                }
+                if(min_age != null){
+                    map.put("min_age",min_age+"");
+                }
+                if(max_age != null){
+                    map.put("max_age",max_age+"");
+                }
+                if(area !=null) {
+                    map.put("area", area + "");
+                }
                 return map;
             }
         };
@@ -400,9 +411,9 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
             @Override
             public void onClick(View v) {
                 window.dismiss();
-                System.out.println(holiday);
-                System.out.println(theme);
-                System.out.println(area);
+                System.out.println(min_age);
+                System.out.println(max_age);
+                getDate();
             }
         });
         //重置监听事件
@@ -424,6 +435,8 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
         click();
         //初始值
         initialize();
+        //年龄双向选择
+        setListener();
     }
 
     class Click implements View.OnClickListener {
@@ -671,7 +684,24 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
         this.termini_all = search_layout.findViewById(R.id.termini_all);//目的地  不限
         this.anhui = search_layout.findViewById(R.id.anhui);
         this.beijing = search_layout.findViewById(R.id.beijing);
+        this.twoWayRattingBar = search_layout.findViewById(R.id.twoWayRattingBar);
     }
+
+    private void setListener() {
+        // 用法
+       twoWayRattingBar.setOnProgressChangeListener(new TwoWayRattingBar.OnProgressChangeListener() {
+           @Override
+           public void onLeftProgressChange(float progress) {
+               min_age = (int) Math.floor(progress*18);
+           }
+
+           @Override
+           public void onRightProgressChange(float progress) {
+               max_age = (int) Math.floor(progress*18);
+           }
+       });
+    }
+
 }
 
 

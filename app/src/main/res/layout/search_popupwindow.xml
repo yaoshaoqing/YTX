@@ -2,10 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
     android:background="#ffffff"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <!-- 这里的linearLayout加android:background=""这个属性要谨慎，如果加了后，popwindow是不能半透明了的 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -67,9 +72,37 @@
             android:layout_marginTop="@dimen/y14"
             android:id="@+id/select_age_layout"
             >
-        <ytx.app.View.RangeProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y20" />
+            <ytx.app.View.TwoWayRattingBar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y60"
+                app:color_line_normal="#dedede"
+                app:color_line_select="#4db335"
+                app:progress_icon="@mipmap/ic_height_knob"
+                app:stroke_width_normal="5dp"
+                app:stroke_width_select="6dp"
+                app:text_color="#4db335"
+                app:text_size="19sp"
+                android:id="@+id/twoWayRattingBar"
+                />
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_min_without_rule"
+                    android:text="最小值 "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_max_without_rule"
+                    android:gravity="right"
+                    android:text="最大值 "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
         <View
             android:layout_gravity="center_horizontal"
@@ -194,8 +227,9 @@
             android:layout_width="wrap_content"
             android:orientation="vertical"
             android:id="@+id/empty"
-            android:layout_height="@dimen/y30"></LinearLayout>
+            android:layout_height="@dimen/y77"></LinearLayout>
     </LinearLayout>
+    </ScrollView>
     <View
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
