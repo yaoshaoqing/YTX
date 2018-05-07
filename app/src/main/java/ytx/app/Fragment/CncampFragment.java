@@ -170,7 +170,7 @@ public class CncampFragment extends BaseFragment implements AdapterView.OnItemCl
         this.search_popupwindow = view.findViewById(R.id.search);
         this.PullTolistView.setOnItemClickListener(this);
         inflater = LayoutInflater.from(this.activity);
-        this.search_layout.setOnClickListener(this);
+        this.search_popupwindow.setOnClickListener(this);
     }
 
     protected void adaper(){
