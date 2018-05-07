@@ -411,8 +411,6 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
             @Override
             public void onClick(View v) {
                 window.dismiss();
-                System.out.println(min_age);
-                System.out.println(max_age);
                 getDate();
             }
         });
@@ -500,18 +498,22 @@ public class GncampFragment extends BaseFragment implements AdapterView.OnItemCl
                     holiday = 12;
                     break;
                 case R.id.date_all://不限
+                    holiday = null;
                     setDateAllColor();
                     setDateClickColor(date_all);
                     break;
                 case R.id.termini_all://目的地
+                    area = null;
                     setTerminiAllColor();
                     setTerminiClickColor(termini_all);
                     break;
                 case R.id.anhui:
+                    area = 202;
                     setTerminiAllColor();
                     setTerminiClickColor(anhui);
                     break;
                 case R.id.beijing:
+                    area = 1;
                     setTerminiAllColor();
                     setTerminiClickColor(beijing);
                     break;

@@ -130,7 +130,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                //如果没登录跳转到登录页面
+                if(position == 3 && !IsLogin.getLogin_type(MainActivity.this)){
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 seticon(position);
+
             }
 
             @Override

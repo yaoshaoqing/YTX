@@ -1,6 +1,21 @@
 {
     "logs": [
         {
+            "outputFile": "E:\\YTX\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-it\\values-it.xml",
+            "map": [
+                {
+                    "source": "E:\\YTX\\library\\build\\intermediates\\bundles\\debug\\res\\values-it\\values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,131,205",
+                        "endColumns": "75,73,81",
+                        "endOffsets": "126,200,282"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "D:\\YTX\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-it\\values-it.xml",
             "map": [
                 {
@@ -20,6 +35,21 @@
             "map": [
                 {
                     "source": "D:\\YTX\\library\\build\\intermediates\\bundles\\debug\\res\\values-it\\values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,131,205",
+                        "endColumns": "75,73,81",
+                        "endOffsets": "126,200,282"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\YTX\\library\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-it\\values-it.xml",
+            "map": [
+                {
+                    "source": "E:\\YTX\\library\\build\\intermediates\\bundles\\debug\\res\\values-it\\values-it.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
